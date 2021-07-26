@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BckUp</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="app_slogan"> Always feel safe when you come face to face with law enforcement</string>
+    <string name="google_txt_help">Sign up with your Google account so we can back up recordings to your Google Drive</string>
+    <string name="google_signIn">Sign In with Google</string>
+
+
+</resources>
