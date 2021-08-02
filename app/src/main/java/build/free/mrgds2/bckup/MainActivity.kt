@@ -48,14 +48,16 @@ class MainActivity : AppCompatActivity() {
         //set on click action
         signInButton.setOnClickListener{
             signIn()
+
          //  Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
 
     }
 
     private fun signIn() {
-        var signInIntent = mGoogleSignInClient?.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        var signInIntent = mGoogleSignInClient?.getSignInIntent()
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+
     }
 
 
@@ -76,6 +78,11 @@ class MainActivity : AppCompatActivity() {
             val account = completedTask.getResult(ApiException::class.java)
 
             // Signed in successfully, show authenticated UI.
+            //go to home page
+            startActivity( Intent(this@MainActivity, HomeActivity::class.java))
+            
+            //destroy sign-in activity after sign-in
+            this.finish()
 
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
