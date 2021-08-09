@@ -85,9 +85,21 @@ class MainActivity : AppCompatActivity() {
             this.finish()
 
         } catch (e: ApiException) {
+
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
+
+            ////TODO: REMOVE ERROR CODE 10 bypass after testing
+            startActivity( Intent(this@MainActivity, HomeActivity::class.java))
+
+            ////TODO: REMOVE ERROR CODE 10 bypass after testing
+            this.finish()
+
+            ////TODO: REMOVE ERROR CODE 10 bypass after testing
+            Toast.makeText(this@MainActivity, "FAILED, Bypassing:" +
+                    e.statusCode, Toast.LENGTH_SHORT).show()
             Log.w("MainActivity", "signInResult:failed code=" + e.statusCode)
+
         }
 
     }
