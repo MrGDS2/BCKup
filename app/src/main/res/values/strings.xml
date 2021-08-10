@@ -15,5 +15,9 @@
     <string name="contact_fragment">Contact</string>
     <string name="tracker_fragment">Tracker</string>
 
+    <!-- media Player -->
+    <string name="title_of_player">BckUP Player</string>
+    <string name="now_playing">Now Playing</string>
+
 
 </resources>
