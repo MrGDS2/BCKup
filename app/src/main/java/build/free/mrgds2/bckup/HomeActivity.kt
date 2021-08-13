@@ -8,6 +8,9 @@ import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import build.free.mrgds2.bckup.ui.main.SectionsPagerAdapter
 
 class HomeActivity : AppCompatActivity() {
@@ -22,6 +25,11 @@ class HomeActivity : AppCompatActivity() {
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
 
+//        val navController : NavController = Navigation
+//            .findNavController(this@HomeActivity,R.id.nav_host_fragment)
+
+
+
 
 
 
@@ -34,3 +42,4 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 }
+

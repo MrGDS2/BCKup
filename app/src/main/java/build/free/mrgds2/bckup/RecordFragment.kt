@@ -54,11 +54,11 @@ class RecordFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        val view: View = inflater!!.inflate(R.layout.fragment_record, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_record, container, false)
 
         ibRecord_button= view.findViewById(R.id.record_btn)
         ibRecordListBtn= view.findViewById(R.id.record_list_btn)
-        navController = Navigation.findNavController(requireActivity(),R.id.fragment_container_record_view)
+
 
         ibRecord_button.setOnClickListener {
             Toast.makeText(activity, "Recording now..", Toast.LENGTH_SHORT).show()
@@ -66,7 +66,7 @@ class RecordFragment : Fragment() {
 
         ibRecordListBtn.setOnClickListener {
             Toast.makeText(activity, "Showing list!", Toast.LENGTH_SHORT).show()
-            navController.navigate(R.id.action_recordFragment_to_audioFragment)
+           Navigation.findNavController(it).navigate(R.id.action_recordFragment_to_audioFragment)
         }
 
 
