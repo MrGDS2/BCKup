@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_record" >
         <action
             android:id="@+id/action_recordFragment_to_audioFragment"
-            app:destination="@id/audioFragment" />
+            app:destination="@id/audioFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_bottom" />
     </fragment>
     <fragment
         android:id="@+id/audioFragment"
