@@ -59,8 +59,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
@@ -68,20 +66,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
-<!--    <fragment-->
-<!--        android:id="@+id/nav_host_fragment"-->
-<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:navGraph="@navigation/nav_graph"-->
-<!--        app:defaultNavHost="true"-->
-<!--        />-->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@android:drawable/ic_dialog_info" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="top|end"-->
+<!--        android:layout_margin="@dimen/fab_margin"-->
+<!--        app:backgroundTint="@color/colorPrimary"-->
+<!--        app:srcCompat="@android:drawable/ic_dialog_info" />-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

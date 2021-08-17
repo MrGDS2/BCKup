@@ -71,8 +71,9 @@
 
          />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/play_btn"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40sp"
@@ -83,8 +84,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/media_forward_btn"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="40sp"
@@ -95,8 +97,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/media_back_btn"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40sp"

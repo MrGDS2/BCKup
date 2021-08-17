@@ -9,16 +9,23 @@
         android:id="@+id/recordFragment"
         android:name="build.free.mrgds2.bckup.RecordFragment"
         android:label="fragment_record"
-        tools:layout="@layout/fragment_record" >
+        tools:layout="@layout/fragment_record">
         <action
             android:id="@+id/action_recordFragment_to_audioFragment"
             app:destination="@id/audioFragment"
-            app:enterAnim="@anim/slide_in_bottom"
-            app:exitAnim="@anim/slide_out_bottom" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/audioFragment"
         android:name="build.free.mrgds2.bckup.AudioFragment"
         android:label="fragment_audio"
-        tools:layout="@layout/fragment_audio" />
+        tools:layout="@layout/fragment_audio" >
+        <action
+            android:id="@+id/action_back_to_recordFragment"
+            app:destination="@id/recordFragment"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
 </navigation>
