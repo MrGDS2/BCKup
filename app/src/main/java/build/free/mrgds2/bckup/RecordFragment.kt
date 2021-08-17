@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat.getDrawable
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -32,7 +33,7 @@ class RecordFragment : Fragment() {
     lateinit var  ibRecord_button: ImageButton
     lateinit var ibRecordListBtn: ImageButton
     lateinit var navController : NavController
-
+    private  var isRecording: Boolean=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,6 +53,16 @@ class RecordFragment : Fragment() {
 
         ibRecord_button.setOnClickListener {
             Toast.makeText(activity, "Recording now..", Toast.LENGTH_SHORT).show()
+
+            isRecording = if (isRecording){
+                //stop recording
+                ibRecord_button.setImageDrawable(resources.getDrawable(R.drawable.record_btn_stopped,null))
+                false
+            } else {
+                //start recording
+                ibRecord_button.setImageDrawable(resources.getDrawable(R.drawable.record_btn_recording,null))
+                true
+            }
         }
 
         ibRecordListBtn.setOnClickListener {
