@@ -27,7 +27,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
 
 
         var fragment: Fragment = when (position) {
-            0 -> RecordFragment()
+            0 -> NavViewerRecordFragment()
 
             1 -> ContactsFragment()
 

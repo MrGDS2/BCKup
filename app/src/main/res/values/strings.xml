@@ -11,9 +11,13 @@
     <string name="tab_text_3">Stop Tracker</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="record_fragment">Record</string>
+    <string name="record_fragment">Press the center button to start recording</string>
     <string name="contact_fragment">Contact</string>
     <string name="tracker_fragment">Tracker</string>
+
+    <!-- media Player -->
+    <string name="title_of_player">BckUP Player</string>
+    <string name="now_playing">Now Playing</string>
 
 
 </resources>

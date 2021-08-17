@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="60sp"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/topPanel"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:weightSum="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:paddingTop="16sp"
+            android:paddingBottom="16sp"
+            app:srcCompat="@drawable/player_header_icon" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:paddingTop="16sp"
+            android:paddingBottom="16sp"
+            android:text="@string/title_of_player"
+            android:textColor="@color/colorTextMain"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/now_playing"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorTextMain" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/record_filename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="File Name"
+        android:textColor="@color/colorTextMain"
+        android:textSize="20sp"
+        android:layout_marginTop="32sp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/topPanel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+         />
+
+    <ImageButton
+        android:id="@+id/play_btn"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40sp"
+        android:layout_marginEnd="32sp"
+        android:layout_marginStart="32sp"
+        app:srcCompat="@drawable/player_play_btn"
+        app:layout_constraintTop_toBottomOf="@id/record_filename"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/media_forward_btn"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40sp"
+        app:srcCompat="@drawable/player_forward_btn"
+        app:layout_constraintLeft_toLeftOf="@id/play_btn"
+        app:layout_constraintTop_toTopOf="@id/play_btn"
+        app:layout_constraintBottom_toBottomOf="@id/play_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ImageButton
+        android:id="@+id/media_back_btn"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40sp"
+        app:srcCompat="@drawable/player_back_btn"
+        app:layout_constraintRight_toRightOf="@id/play_btn"
+        app:layout_constraintTop_toTopOf="@id/play_btn"
+        app:layout_constraintBottom_toBottomOf="@id/play_btn"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <SeekBar
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/play_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
