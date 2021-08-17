@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
         android:layout_margin="@dimen/fab_margin"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_revert" />
 
