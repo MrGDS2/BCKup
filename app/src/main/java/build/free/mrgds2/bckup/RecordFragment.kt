@@ -157,11 +157,12 @@ class RecordFragment : Fragment() {
         //try catch to catch error when mediaRecorder is unprepared
         try {
             mediaRecorder.prepare()
-
-        } catch (e: IOException) { e.printStackTrace() }
-        try {
             mediaRecorder.start()
-        } catch (e : IOException){ e.printStackTrace()}
+        }  catch (e: IllegalStateException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
 
@@ -179,7 +180,7 @@ class RecordFragment : Fragment() {
         Toast.makeText(activity, "Saved file: $savedFilePath", Toast.LENGTH_SHORT).show()
         mediaRecorder.stop()
         mediaRecorder.reset()  // set state to idle
-        mediaRecorder.release() // release resources back to the system
+      //  mediaRecorder.release()
 
     }
     private fun getOutputFileName(): String {
