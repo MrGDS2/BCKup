@@ -3,7 +3,6 @@ package build.free.mrgds2.bckup
 
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,12 +13,11 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat.getDrawable
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
+import java.io.File
 import java.io.IOException
-import java.util.jar.Manifest
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,9 +39,9 @@ class RecordFragment : Fragment() {
     private var isRecording: Boolean = false
     private val TAG = "RecordPermission"
     private val RECORD_REQUEST_CODE = 101
-    private val mediaRecorder: MediaRecorder? = null
-    private var mediaPath: String = ""
-    private var mediaFile: String = ""
+    private val mediaRecorder: MediaRecorder = MediaRecorder()
+    private var mediaPath  = ""
+    private var bckupFileName = "BckUP_"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,35 +140,69 @@ class RecordFragment : Fragment() {
 
     private fun startRecording() {
 
+
+        println(getOutputFileName())
         Toast.makeText(activity, "Recording now..", Toast.LENGTH_SHORT).show()
 
         //path where file is saved after recording
         mediaPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
-        mediaFile = "BckUP_File_20210818.mp3"
 
         //TODO:ERROR CHECK
-        mediaRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
+        //TODO:ERROR CHECK
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-        mediaRecorder.setOutputFile("$mediaPath/$mediaFile")
-        //TODO: try catch?
+        mediaRecorder.setOutputFile("$mediaPath/${getOutputFileName()}")
+
+        //try catch to catch error when mediaRecorder is unprepared
         try {
             mediaRecorder.prepare()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
 
-        mediaRecorder.start()
+        } catch (e: IOException) { e.printStackTrace() }
+        try {
+            mediaRecorder.start()
+        } catch (e : IOException){ e.printStackTrace()}
     }
 
 
     private fun stopRecording() {
 
-        val savedFileName = "$mediaPath/$mediaFile"
+        val savedFilePath = "$mediaPath/$bckupFileName"
 
-        Toast.makeText(activity, "Saved file: /$savedFileName", Toast.LENGTH_SHORT).show()
-        mediaRecorder!!.stop()
-        mediaRecorder.release()
+        if( doesFileExits()){
+            Log.w("SAVED FILE==> ","Saved file: $savedFilePath")
+        }
+        else {
+            Log.w("SAVED FILE==> ","File not created")
+        }
+
+        Toast.makeText(activity, "Saved file: $savedFilePath", Toast.LENGTH_SHORT).show()
+        mediaRecorder.stop()
+        mediaRecorder.reset()  // set state to idle
+        mediaRecorder.release() // release resources back to the system
+
+    }
+    private fun getOutputFileName(): String {
+
+        val mediaFile = "$bckupFileName${currentDateTime()}" //val with current date
+
+        return "$mediaFile.mp3"
     }
 
+    private fun currentDateTime() : String{
+
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HH_mm_ss")
+
+        return current.format(formatter)
+    }
+
+
+    private fun doesFileExits() :Boolean {
+
+        val fileName = getOutputFileName()
+        val file = File(fileName)
+
+        return file.exists()
+    }
 }
