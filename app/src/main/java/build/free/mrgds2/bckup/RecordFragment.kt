@@ -39,7 +39,7 @@ class RecordFragment : Fragment() {
     private var isRecording: Boolean = false
     private val TAG = "RecordPermission"
     private val RECORD_REQUEST_CODE = 101
-    private val mediaRecorder: MediaRecorder = MediaRecorder()
+    private var mediaRecorder: MediaRecorder? = MediaRecorder()
     private var mediaPath  = ""
     private var bckupFileName = "BckUP_"
 
@@ -84,9 +84,27 @@ class RecordFragment : Fragment() {
 
     }
 
-    override fun onDetach() {
-        super.onDetach()
+
+    override fun onPause() {
+        super.onPause()
+
+        toggleButtonRecord() //release asset and stop recording
+
+        // Free up resources from MediaRecorder when leaving Fragment
+        if (mediaRecorder != null) {
+           mediaRecorder?.release() //release in case object is not closed
+           mediaRecorder= null
+        }
+        Toast.makeText(activity,"changed screens recoding has stopped",Toast.LENGTH_SHORT).show()
     }
+
+    override fun onStop() {
+        super.onStop()
+
+    }
+
+
+
 
     private fun setupPermissions(): Boolean {
         val permission = ContextCompat.checkSelfPermission(
@@ -147,17 +165,16 @@ class RecordFragment : Fragment() {
         //path where file is saved after recording
         mediaPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
 
-        //TODO:ERROR CHECK
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
-        //TODO:ERROR CHECK
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-        mediaRecorder.setOutputFile("$mediaPath/${getOutputFileName()}")
+
+        mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
+        mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        mediaRecorder?.setOutputFile("$mediaPath/${getOutputFileName()}")
 
         //try catch to catch error when mediaRecorder is unprepared
         try {
-            mediaRecorder.prepare()
-            mediaRecorder.start()
+            mediaRecorder?.prepare()
+            mediaRecorder?.start()
         }  catch (e: IllegalStateException) {
             e.printStackTrace()
         } catch (e: IOException) {
@@ -178,9 +195,10 @@ class RecordFragment : Fragment() {
         }
 
         Toast.makeText(activity, "Saved file: $savedFilePath", Toast.LENGTH_SHORT).show()
-        mediaRecorder.stop()
-        mediaRecorder.reset()  // set state to idle
-      //  mediaRecorder.release()
+        mediaRecorder?.stop()
+        mediaRecorder?.reset()  // set state to idle
+        mediaRecorder?.release()
+        mediaRecorder=null
 
     }
     private fun getOutputFileName(): String {
