@@ -4,20 +4,25 @@ package build.free.mrgds2.bckup
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Chronometer
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.File
 import java.io.IOException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.concurrent.timer
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,7 +40,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class RecordFragment : Fragment() {
     lateinit var ibRecord_button: ImageButton
-    lateinit var ibRecordListBtn: ImageButton
+    lateinit var ibRecordListBtn: FloatingActionButton
+    lateinit var chronometer: Chronometer
     private var isRecording: Boolean = false
     private val TAG = "RecordPermission"
     private val RECORD_REQUEST_CODE = 101
@@ -59,7 +65,7 @@ class RecordFragment : Fragment() {
 
         ibRecord_button = view.findViewById(R.id.record_btn)
         ibRecordListBtn = view.findViewById(R.id.record_list_btn)
-
+        chronometer = view.findViewById(R.id.record_timer)
 
         ibRecord_button.setOnClickListener {
 
@@ -144,25 +150,19 @@ class RecordFragment : Fragment() {
         } else {
             //start recording
             startRecording()
-            ibRecord_button.setImageDrawable(
-                resources.getDrawable(
-                    R.drawable.record_btn_recording,
-                    null
-                )
-            )
+            // Adding the gif here using glide library
+            Glide.with(this).load(R.drawable.record_btn_playing).into(ibRecord_button);
             true
-
-
         }
     }
 
     private fun startRecording() {
 
+        chronometer.base = SystemClock.elapsedRealtime() //get system clock (elapsed real time)
+        chronometer.start() //start UI timer
 
-        println(getOutputFileName())
-        Toast.makeText(activity, "Recording now..", Toast.LENGTH_SHORT).show()
-
-        //path where file is saved after recording
+        Toast.makeText(activity,
+            "Recording now..", Toast.LENGTH_SHORT).show() //path where file is saved after recording
         mediaPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
 
 
@@ -184,6 +184,8 @@ class RecordFragment : Fragment() {
 
 
     private fun stopRecording() {
+
+         chronometer.stop() //stops UI timer
 
         val savedFilePath = "$mediaPath/$bckupFileName"
 
