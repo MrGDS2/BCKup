@@ -41,10 +41,10 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class RecordFragment : Fragment() {
-    lateinit var ibRecord_button: ImageButton
-    lateinit var ibRecordListBtn: FloatingActionButton
-    lateinit var tvFileNameText : TextView
-    lateinit var chronometer: Chronometer
+    private lateinit var ibRecord_button: ImageButton
+    private lateinit var ibRecordListBtn: FloatingActionButton
+    private lateinit var tvFileNameText : TextView
+    private lateinit var chronometer: Chronometer
     private var isRecording: Boolean = false
     private val TAG = "RecordPermission"
     private val RECORD_REQUEST_CODE = 101
