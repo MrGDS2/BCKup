@@ -1,6 +1,7 @@
 package build.free.mrgds2.bckup
 
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -41,6 +43,7 @@ private const val ARG_PARAM2 = "param2"
 class RecordFragment : Fragment() {
     lateinit var ibRecord_button: ImageButton
     lateinit var ibRecordListBtn: FloatingActionButton
+    lateinit var tvFileNameText : TextView
     lateinit var chronometer: Chronometer
     private var isRecording: Boolean = false
     private val TAG = "RecordPermission"
@@ -48,12 +51,6 @@ class RecordFragment : Fragment() {
     private var mediaRecorder: MediaRecorder? = MediaRecorder()
     private var mediaPath  = ""
     private var bckupFileName = "BckUP_"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +62,7 @@ class RecordFragment : Fragment() {
 
         ibRecord_button = view.findViewById(R.id.record_btn)
         ibRecordListBtn = view.findViewById(R.id.record_list_btn)
+        tvFileNameText =view.findViewById(R.id.record_filename)
         chronometer = view.findViewById(R.id.record_timer)
 
         ibRecord_button.setOnClickListener {
@@ -85,16 +83,9 @@ class RecordFragment : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
 
     override fun onPause() {
         super.onPause()
-
-        toggleButtonRecord() //release asset and stop recording
 
         // Free up resources from MediaRecorder when leaving Fragment
         if (mediaRecorder != null) {
@@ -103,13 +94,6 @@ class RecordFragment : Fragment() {
         }
         Toast.makeText(activity,"changed screens recoding has stopped",Toast.LENGTH_SHORT).show()
     }
-
-    override fun onStop() {
-        super.onStop()
-
-    }
-
-
 
 
     private fun setupPermissions(): Boolean {
@@ -136,10 +120,14 @@ class RecordFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun toggleButtonRecord() {
         isRecording = if (isRecording) {
-            //stop recording
-            stopRecording()
+
+            stopRecording() //stop recording
+
+            tvFileNameText.text = "Saved File: " + getOutputFileName() //show user recording file name
+
             ibRecord_button.setImageDrawable(
                 resources.getDrawable(
                     R.drawable.record_btn_stopped,
@@ -148,14 +136,17 @@ class RecordFragment : Fragment() {
             )
             false
         } else {
-            //start recording
-            startRecording()
-            // Adding the gif here using glide library
-            Glide.with(this).load(R.drawable.record_btn_playing).into(ibRecord_button);
+            startRecording() //start recording
+
+            tvFileNameText.text = "Recording File: ${getOutputFileName()}" //show user recording file name
+
+            Glide.with(this).load(R.drawable.record_btn_playing).into(ibRecord_button)// Adding the gif here using glide library
             true
         }
     }
 
+
+    @SuppressLint("SetTextI18n")
     private fun startRecording() {
 
         chronometer.base = SystemClock.elapsedRealtime() //get system clock (elapsed real time)
@@ -165,11 +156,11 @@ class RecordFragment : Fragment() {
             "Recording now..", Toast.LENGTH_SHORT).show() //path where file is saved after recording
         mediaPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
 
-
         mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
         mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
         mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
         mediaRecorder?.setOutputFile("$mediaPath/${getOutputFileName()}")
+
 
         //try catch to catch error when mediaRecorder is unprepared
         try {

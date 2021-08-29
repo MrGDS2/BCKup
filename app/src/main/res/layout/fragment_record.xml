@@ -51,7 +51,7 @@
     <ImageButton
         android:id="@+id/record_btn"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/transparent"
         android:src="@drawable/record_btn_stopped"
         app:layout_constraintBottom_toBottomOf="parent"
