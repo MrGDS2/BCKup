@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/audio_item_bubble_bg"
+    android:paddingBottom="20dp"
+    >
+
+
+
+    <ImageView
+        android:id="@+id/media_list_play_btn"
+        android:layout_width="75dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bckup_list_play_btn" />
+
+    <TextView
+        android:id="@+id/name_of_media_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FileName"
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextMain"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/media_audio_img"
+
+        app:layout_constraintEnd_toStartOf="@+id/media_list_play_btn"
+        app:layout_constraintStart_toEndOf="@+id/media_audio_img"
+        app:layout_constraintTop_toTopOf="@id/media_audio_img"
+        app:layout_constraintVertical_bias="0.41" />
+
+    <TextView
+        android:id="@+id/date_of_media_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9/1/2021"
+        android:textColor="@color/colorTextMain"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/media_list_play_btn"
+        app:layout_constraintStart_toEndOf="@+id/media_audio_img"
+        app:layout_constraintTop_toBottomOf="@+id/media_audio_img"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/location_of_media_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45sp"
+        android:text="location"
+        android:textSize="12sp"
+        android:textColor="@color/colorTextMain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/media_list_play_btn"
+        app:layout_constraintStart_toEndOf="@+id/media_audio_img"
+        app:layout_constraintTop_toBottomOf="@+id/name_of_media_tv" />
+
+    <ImageView
+        android:id="@+id/media_audio_img"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/media_list_play_btn"
+        app:layout_constraintEnd_toStartOf="@+id/media_list_play_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.338"
+        app:srcCompat="@drawable/song_note" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

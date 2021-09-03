@@ -56,9 +56,13 @@ class RecordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
-        val view: View = inflater.inflate(R.layout.fragment_record, container, false)
+      return inflater.inflate(R.layout.fragment_record, container, false) // Inflate the layout for this fragment
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         ibRecord_button = view.findViewById(R.id.record_btn)
         ibRecordListBtn = view.findViewById(R.id.record_list_btn)
@@ -78,11 +82,7 @@ class RecordFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_recordFragment_to_audioFragment)
         }
 
-
-        // Inflate the layout for this fragment
-        return view
     }
-
 
     override fun onPause() {
         super.onPause()
